@@ -2,3 +2,6 @@
 node_modules
 dist
 yarn.lock
+babel.config.js
+eslint.config.ts
+prettier.config.cjs
