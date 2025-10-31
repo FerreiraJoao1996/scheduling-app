@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import { env } from 'shared/env/env';
-import { routes } from 'routes.ts';
+import { routes } from 'routes';
 import { errorHandler } from 'shared/error/errorHandler';
 
 const app = express();

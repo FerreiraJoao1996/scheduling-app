@@ -7,19 +7,7 @@ services:
       dockerfile: .dockerfile
     environment:
       NODE_ENV: development
-      PORT: 3333
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      DB_TYPE: mysql
-      DB_HOST: localhost
-      DB_PORT: 3306
-      DB_DATABASE: orders
-      DB_USER: orderdb
-      DB_PASSWORD: Mudar@123
-      AWS_REGION: us-east-1
-      AWS_ENDPOINT: http://localstack:4566
-      AWS_ACCESS_KEY_ID: test
-      AWS_SECRET_ACCESS_KEY: test
+    env_file: .env
     depends_on:
       redis:
         condition: service_started

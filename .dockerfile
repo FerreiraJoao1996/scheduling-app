@@ -16,7 +16,7 @@ WORKDIR /order-app
 
 COPY --from=builder /order-app/dist ./dist
 COPY --from=builder /order-app/package*.json ./
-COPY --from=builder /order-app/.env ./
+# COPY --from=builder /order-app/.env ./
 
 RUN npm install
 
