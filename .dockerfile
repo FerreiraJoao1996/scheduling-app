@@ -16,9 +16,8 @@ WORKDIR /scheduling-app
 
 COPY --from=builder /scheduling-app/dist ./dist
 COPY --from=builder /scheduling-app/package*.json ./
-# COPY --from=builder /scheduling-app/.env ./
 
-RUN npm install
+RUN npm install --omit=dev
 
 EXPOSE 3333
 
