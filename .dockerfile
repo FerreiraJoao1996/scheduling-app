@@ -1,6 +1,6 @@
 FROM node:24-alpine AS builder
 
-WORKDIR /order-app
+WORKDIR /scheduling-app
 
 COPY package*.json ./
 
@@ -12,11 +12,11 @@ RUN npm run build
 
 FROM node:24-alpine AS runner
 
-WORKDIR /order-app
+WORKDIR /scheduling-app
 
-COPY --from=builder /order-app/dist ./dist
-COPY --from=builder /order-app/package*.json ./
-# COPY --from=builder /order-app/.env ./
+COPY --from=builder /scheduling-app/dist ./dist
+COPY --from=builder /scheduling-app/package*.json ./
+# COPY --from=builder /scheduling-app/.env ./
 
 RUN npm install
 
