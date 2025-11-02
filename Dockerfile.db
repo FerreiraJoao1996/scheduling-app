@@ -1,0 +1,5 @@
+FROM mysql:8.0
+
+COPY healthcheckdb.sh /usr/local/bin/healthcheckdb.sh
+
+RUN chmod +x /usr/local/bin/healthcheckdb.sh

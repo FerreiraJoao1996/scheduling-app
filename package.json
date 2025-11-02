@@ -7,8 +7,6 @@
     "dev": "tsx watch ./src/index.ts",
     "debug": "tsx watch ./src/index.ts",
     "build": "tsup src --out-dir dist --format esm",
-    "dev:api": "tsx src/api.ts",
-    "dev:worker": "tsx src/worker.ts",
     "create-queue": "tsx src/scripts/ensureQueue.ts"
   },
   "keywords": [],
@@ -22,7 +20,9 @@
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
+    "esbuild": "0.25.11",
     "express": "^5.1.0",
+    "mysql2": "^3.15.3",
     "redis": "^5.9.0",
     "ts-node": "^10.9.2"
   },

@@ -8,6 +8,7 @@ RUN npm install
 
 COPY . .
 
+RUN npm rebuild esbuild
 RUN npm run build
 
 FROM node:24-alpine AS runner
