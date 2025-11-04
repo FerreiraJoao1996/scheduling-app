@@ -25,4 +25,8 @@ export interface IEnv {
 
   REDIS_HOST: string;
   REDIS_PORT: number;
+
+  JWT_SECRET: string;
+  JWT_ACCESS_EXPIRATION_TIME: string;
+  JWT_REFRESH_EXPIRATION_TIME: string;
 }

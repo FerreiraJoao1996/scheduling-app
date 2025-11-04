@@ -23,6 +23,10 @@ const env: IEnv = {
 
     REDIS_HOST: getEnv('REDIS_HOST', undefined),
     REDIS_PORT: getNumberEnv('REDIS_PORT', 6379),
+
+    JWT_SECRET: getEnv('JWT_SECRET', undefined),
+    JWT_ACCESS_EXPIRATION_TIME: getEnv('JWT_ACCESS_EXPIRATION_TIME', undefined),
+    JWT_REFRESH_EXPIRATION_TIME: getEnv('JWT_REFRESH_EXPIRATION_TIME', undefined),
 };
 
 function getEnv(key: string, defaultValue: any): string {

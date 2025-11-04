@@ -1,9 +1,8 @@
 import cors from 'cors';
 import express from 'express';
 import { env } from 'shared/env/env';
-import { routes } from 'routes';
 import { errorHandler } from 'shared/error/errorHandler';
-
+import { routes } from 'routes/routes';
 const app = express();
 
 app.use(cors({}));

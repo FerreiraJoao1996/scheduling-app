@@ -2,7 +2,6 @@
   "compilerOptions": {
     "module": "esnext",
     "esModuleInterop": true,
-    //    "target": "es6",
     "target": "ES2022",
     "moduleResolution": "node",
     "sourceMap": true,
@@ -11,7 +10,8 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "typeRoots": ["src/types", "./node_modules/@types"]
   },
   "lib": ["es2015"],
   "include": ["src"]
