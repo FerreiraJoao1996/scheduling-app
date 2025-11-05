@@ -1,5 +1,5 @@
 import { AuthDTO } from "modules/auth/dto/auth";
-import { UsersDTO } from "modules/users/dto/user";
+import { UserDTO } from "modules/users/dto/user";
 import jwt from 'jsonwebtoken';
 import { JwtPayload } from 'jsonwebtoken';
 import { env } from "shared/env/env";
@@ -8,7 +8,7 @@ import { Request } from "express";
 import bcrypt from 'bcrypt';
 
 export class Auth {
-    static async generateToken(user: UsersDTO): Promise<AuthDTO> {
+    static async generateToken(user: UserDTO): Promise<AuthDTO> {
         const accessToken = jwt.sign({ id: user.id }, env.JWT_SECRET, {
             subject: String(user.id),
             expiresIn: env.JWT_ACCESS_EXPIRATION_TIME as never,

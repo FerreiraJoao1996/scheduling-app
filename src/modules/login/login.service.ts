@@ -4,30 +4,26 @@ import { AuthDTO } from "modules/auth/dto/auth";
 import { AppError } from "shared/error/appError";
 import jwt from 'jsonwebtoken'
 import { env } from "shared/env/env";
+import { UserRepository } from "repositories/userRepository";
+import { redisClient } from "clients/redisClient";
+import { CacheService } from "shared/utils/cacheService";
 
 
 export class LoginServices {
-  static async login(login: string, secret: string): Promise<AuthDTO> {
-    if (!login || !secret) throw new AppError('Usuário ou senha inválidos', 401);
+  static async login(email: string, password: string): Promise<AuthDTO> {
+    if (!email || !password) throw new AppError('Usuário ou senha inválidos', 401);
 
-    // const user = await UserRepository.findByLogin(email);
+    const user = await UserRepository.findByEmail(email);
 
-    // if (!user) throw new AppError('Usuário ou senha inválidos', 401);
+    if (!user) throw new AppError('Usuário não encontrado', 401);
 
-    const user = {
-        secret: '$2a$12$kmSnzRtbWDzoLK.ZfyW1rOxfBw7wmcyvHoWLLXAp35piSmO212VY6',
-        id: '5d842875-33f6-4dfa-b67a-9e5b25708f28', 
-        name: 'João', 
-        email: "aaaddasdasdas@t.co",
-        phone: "9777777777",
-        roleId: 1
-    }
-
-    const validPassword = await Auth.validatePassword(user.secret, secret);
+    const validPassword = await Auth.validatePassword(user.password, password);
 
     if (!validPassword) {
       throw new AppError('A senha informada não é válida.', 401);
     }
+
+    await redisClient.setEx(`user:${user.id}`, env.REDIS_EXPIRE_TIME, JSON.stringify({ id: user.id, name: user.name, roleId: user.roleId }));
 
     return await Auth.generateToken(user);
   }
@@ -48,22 +44,16 @@ export class LoginServices {
       throw new AppError('Refresh token inválido ou expirado, faça o login novamente!', 401);
     }
 
-    // const user = await UserRepository.findById(decoded.sub);
-    // if (!user) throw new AppError('Usuário não encontrado', 404);
-
-    const user = {
-        secret: '$2a$12$kmSnzRtbWDzoLK.ZfyW1rOxfBw7wmcyvHoWLLXAp35piSmO212VY6',
-        id: '5d842875-33f6-4dfa-b67a-9e5b25708f28', 
-        name: 'João', 
-        email: "aaaddasdasdas@t.co",
-        phone: "9777777777",
-        roleId: 1
-    }
+    const user = await UserRepository.findById(decoded.sub as string);
+    if (!user) throw new AppError('Usuário não encontrado', 404);
 
     const auth = await Auth.generateToken(user);
 
     return { ...auth, refreshToken };
   }
 
-  // static async logout(id: string): Promise<boolean> {}
+  static async logout(id: string): Promise<void> {
+    return await CacheService.del(`user:${id}`);
+
+  }
 }

@@ -1,5 +1,5 @@
 export interface AuthDTO {
-    id: string;
+    id: number;
     accessToken: string;
     refreshToken: string;
     roleId: number;
