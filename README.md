@@ -142,4 +142,4 @@ cp .env.mysql.example .env
 docker-compose up --build
 
 # 4. A aplicação estará disponível em:
-http://localhost:3000
+http://localhost:3333
